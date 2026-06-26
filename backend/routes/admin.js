@@ -1,26 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const Admin = require("../models/Admin");
 
 router.post("/login", async (req, res) => {
-
   const { username, password } = req.body;
 
-  const admin = await Admin.findOne({
-    username,
-    password
-  });
-
-  if (!admin) {
-    return res.status(401).json({
-      message: "Invalid credentials"
+  if (
+    username === process.env.ADMIN_USERNAME &&
+    password === process.env.ADMIN_PASSWORD
+  ) {
+    return res.json({
+      message: "Login successful"
     });
   }
 
-  res.json({
-    message: "Login successful"
+  return res.status(401).json({
+    message: "Invalid credentials"
   });
-
 });
 
 module.exports = router;
