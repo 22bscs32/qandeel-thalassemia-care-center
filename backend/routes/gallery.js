@@ -19,9 +19,9 @@ router.post("/", upload.single("media"), async (req, res) => {
   try {
     const { title, description } = req.body;
 
-    const fileUrl = req.file
-      ? `https://qandeel-thalassemia-care-center-production.up.railway.app/uploads/${req.file.filename}`
-      : "";
+   const fileUrl = req.file
+  ? `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
+  : "";
 
     const fileType = req.file.mimetype.startsWith("video")
       ? "video"
