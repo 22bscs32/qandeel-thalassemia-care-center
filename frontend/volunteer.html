@@ -126,7 +126,7 @@ document.getElementById("volunteerForm").addEventListener("submit", async (e) =>
   };
 
   try {
-    const response = await fetch("http://localhost:5000/api/volunteers", {
+    const response = await fetch("http://qandeel-thalassemia-care-center-production.up.railway.app/api/volunteers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

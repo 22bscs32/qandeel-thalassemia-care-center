@@ -20,7 +20,7 @@ router.post("/", upload.single("media"), async (req, res) => {
     const { title, description } = req.body;
 
     const fileUrl = req.file
-      ? `http://localhost:5000/uploads/${req.file.filename}`
+      ? `http://qandeel-thalassemia-care-center-production.up.railway.app/uploads/${req.file.filename}`
       : "";
 
     const fileType = req.file.mimetype.startsWith("video")

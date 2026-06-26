@@ -239,7 +239,7 @@
 <script>
 async function loadStats() {
   try {
-    const response = await fetch("http://localhost:5000/api/stats");
+    const response = await fetch("http://qandeel-thalassemia-care-center-production.up.railway.app/api/stats");
     const data = await response.json();
 
     document.getElementById("donorsCount").innerText = data.donors + "+";
@@ -251,7 +251,7 @@ async function loadStats() {
 
 async function loadHomeEvents() {
   try {
-    const response = await fetch("http://localhost:5000/api/events");
+    const response = await fetch("http://qandeel-thalassemia-care-center-production.up.railway.app/api/events");
     const events = await response.json();
 
     const container = document.getElementById("homeEventsContainer");

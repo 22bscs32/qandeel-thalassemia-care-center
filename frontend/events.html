@@ -80,7 +80,7 @@
 <script>
 async function loadEvents() {
   try {
-    const response = await fetch("http://localhost:5000/api/events");
+    const response = await fetch("http://qandeel-thalassemia-care-center-production.up.railway.app/api/events");
     const events = await response.json();
 
     const container = document.getElementById("eventsContainer");

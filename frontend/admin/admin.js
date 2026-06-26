@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api";
+const API_URL = "http://qandeel-thalassemia-care-center-production.up.railway.app/api";
 
 async function loadStats() {
   const res = await fetch(`${API_URL}/stats`);
