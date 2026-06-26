@@ -1,5 +1,4 @@
-const API_URL = "http://qandeel-thalassemia-care-center-production.up.railway.app/api";
-
+const API_URL = "https://qandeel-thalassemia-care-center-production.up.railway.app/api";
 async function loadStats() {
   const res = await fetch(`${API_URL}/stats`);
   const data = await res.json();
