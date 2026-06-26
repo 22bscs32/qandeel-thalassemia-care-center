@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <script>
+    if (localStorage.getItem("adminLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Qandeel</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <aside class="sidebar">
+    <div class="admin-brand">
+      <img src="../images/logo.jpeg" class="admin-logo" alt="Qandeel Logo">
+      <h2>QANDEEL</h2>
+      <h4>Thalassemia Care Center</h4>
+      <p>Admin Panel</p>
+    </div>
+
+    <a href="#" onclick="showSection('overview')">🏠 Dashboard</a>
+    <a href="#" onclick="showSection('donors')">🩸 Donors</a>
+    <a href="#" onclick="showSection('patients')">🏥 Patients</a>
+    <a href="#" onclick="showSection('volunteers')">🤝 Volunteers</a>
+    <a href="#" onclick="showSection('donations')">💰 Donations</a>
+    <a href="#" onclick="showSection('events')">📅 Events</a>
+    <a href="#" onclick="showSection('successStories')">🌟 Success Stories</a>
+    <a href="#" onclick="showSection('gallery')">🖼️ Gallery</a>
+    <a href="#" onclick="showSection('contacts')">📩 Contact Messages</a>
+    <a href="#" class="logout-btn" onclick="logout()">🚪 Logout</a>
+  </aside>
+
+  <main class="main-content">
+
+    <h1>Dashboard</h1>
+    <div class="title-line"></div>
+
+    <section id="overview" class="admin-section">
+      <div class="dashboard-cards">
+        <div class="dash-card">
+          <h3 id="donorsCount">0</h3>
+          <p>🩸 Donors</p>
+        </div>
+
+        <div class="dash-card">
+          <h3 id="patientsCount">0</h3>
+          <p>🏥 Patients</p>
+        </div>
+
+        <div class="dash-card">
+          <h3 id="volunteersCount">0</h3>
+          <p>🤝 Volunteers</p>
+        </div>
+
+        <div class="dash-card">
+          <h3 id="donationsCount">0</h3>
+          <p>💰 Donations</p>
+        </div>
+      </div>
+
+      <div class="analytics-section">
+<div class="analytics-section">
+  <h2>Qandeel Treatment Progress</h2>
+
+  <div class="chart-box">
+    <div class="chart-row">
+      <span>Total Patients</span>
+      <div class="bar"><div class="bar-fill red-bar" style="width:100%"></div></div>
+      <strong>300</strong>
+    </div>
+
+    <div class="chart-row">
+      <span>Treated</span>
+      <div class="bar"><div class="bar-fill blue-bar" style="width:50%"></div></div>
+      <strong>150</strong>
+    </div>
+
+    <div class="chart-row">
+      <span>Recovered</span>
+      <div class="bar"><div class="bar-fill green-bar" style="width:49%"></div></div>
+      <strong>146</strong>
+    </div>
+
+    <div class="chart-row">
+      <span>Waiting</span>
+      <div class="bar"><div class="bar-fill orange-bar" style="width:50%"></div></div>
+      <strong>150</strong>
+    </div>
+  </div>
+</div>
+      </div>
+    </section>
+
+    <section id="donors" class="admin-section hidden">
+      <h2>Donors List</h2>
+      <div class="table-actions">
+        <input type="text" class="search-box" id="donorSearch" placeholder="Search donors..." onkeyup="loadDonors()">
+        <button class="export-btn" onclick="exportTable('donorsTable', 'donors.csv')">Export Donors</button>
+      </div>
+      <div class="table-container">
+        <table id="donorsTable"></table>
+      </div>
+    </section>
+
+    <section id="patients" class="admin-section hidden">
+      <h2>Patients List</h2>
+      <div class="table-actions">
+        <input type="text" class="search-box" id="patientSearch" placeholder="Search patients..." onkeyup="loadPatients()">
+        <button class="export-btn" onclick="exportTable('patientsTable', 'patients.csv')">Export Patients</button>
+      </div>
+      <div class="table-container">
+        <table id="patientsTable"></table>
+      </div>
+    </section>
+
+    <section id="volunteers" class="admin-section hidden">
+      <h2>Volunteers List</h2>
+      <div class="table-actions">
+        <input type="text" class="search-box" id="volunteerSearch" placeholder="Search volunteers..." onkeyup="loadVolunteers()">
+        <button class="export-btn" onclick="exportTable('volunteersTable', 'volunteers.csv')">Export Volunteers</button>
+      </div>
+      <div class="table-container">
+        <table id="volunteersTable"></table>
+      </div>
+    </section>
+
+    <section id="donations" class="admin-section hidden">
+      <h2>Donations List</h2>
+      <div class="table-actions">
+        <input type="text" class="search-box" id="donationSearch" placeholder="Search donations..." onkeyup="loadDonations()">
+        <button class="export-btn" onclick="exportTable('donationsTable', 'donations.csv')">Export Donations</button>
+      </div>
+      <div class="table-container">
+        <table id="donationsTable"></table>
+      </div>
+    </section>
+
+    <section id="events" class="admin-section hidden">
+      <h2>Events Management</h2>
+
+      <form id="eventForm" class="event-admin-form">
+        <input type="text" id="eventTitle" placeholder="Event Title" required>
+        <input type="text" id="eventDate" placeholder="Event Date" required>
+        <input type="text" id="eventLocation" placeholder="Location" required>
+        <input type="file" id="eventImage" accept="image/*" required>
+        <textarea id="eventDescription" placeholder="Event Description" required></textarea>
+        <button type="submit">Add Event</button>
+      </form>
+
+      <div class="table-container">
+        <table id="eventsTable"></table>
+      </div>
+    </section>
+
+    <section id="successStories" class="admin-section hidden">
+      <h2>Success Stories Management</h2>
+
+      <form id="successStoryForm" class="event-admin-form">
+        <input type="text" id="storyPatientName" placeholder="Patient Name" required>
+        <input type="text" id="storyAge" placeholder="Age" required>
+        <input type="text" id="storyCity" placeholder="City" required>
+        <input type="text" id="storyStatus" placeholder="Status e.g. Treatment Improved" required>
+
+        <textarea id="storyText" placeholder="Write success story..." required></textarea>
+
+        <input type="file" id="storyImage" accept="image/*" required>
+
+        <button type="submit">Add Success Story</button>
+      </form>
+
+      <div class="table-container">
+        <table id="successStoriesTable"></table>
+      </div>
+    </section>
+
+    <section id="gallery" class="admin-section hidden">
+      <h2>Gallery Management</h2>
+
+      <form id="galleryForm" class="event-admin-form">
+        <input type="text" id="galleryTitle" placeholder="Title" required>
+        <textarea id="galleryDescription" placeholder="Write description..." required></textarea>
+        <input type="file" id="galleryMedia" accept="image/*,video/*" required>
+        <button type="submit">Add Gallery Item</button>
+      </form>
+
+      <div class="table-container">
+        <table id="galleryTable"></table>
+      </div>
+    </section>
+
+    <section id="contacts" class="admin-section hidden">
+      <h2>Contact Messages</h2>
+      <div class="table-actions">
+        <input type="text" class="search-box" id="contactSearch" placeholder="Search messages..." onkeyup="loadContacts()">
+        <button class="export-btn" onclick="exportTable('contactsTable', 'contacts.csv')">Export Contacts</button>
+      </div>
+      <div class="table-container">
+        <table id="contactsTable"></table>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+<footer class="footer">
+
+  <div class="footer-row">
+
+    <div class="footer-brand">
+      <strong>QANDEEL</strong>
+    </div>
+
+    <div class="footer-text">
+      Supporting Thalassemia patients through care, treatment and blood donation.
+    </div>
+
+    <div class="footer-location">
+      📍 Panjgur, Balochistan
+    </div>
+
+    <div class="footer-phone">
+      📞 03333002324
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Qandeel Thalassemia Care Center. All Rights Reserved.
+  </div>
+
+</footer>
+
+<script src="admin.js"></script>
+</body>
+</html>

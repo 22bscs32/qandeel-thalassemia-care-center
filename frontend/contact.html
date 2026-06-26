@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Qandeel Thalassemia Care Center</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo-container">
+    <img src="images/logo.jpeg" class="logo-img" alt="Logo">
+    <div class="logo">
+      <h2>QANDEEL</h2>
+      <p>THALASSEMIA CARE CENTER</p>
+      <span class="tagline">Saving Lives Through Blood Donation & Care</span>
+    </div>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="donors.html">Donors</a>
+    <a href="success-stories.html">Success Stories</a>
+    <a href="patients.html">Patients</a>
+    <a href="events.html">Events</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html" class="active">Contact</a>
+  </nav>
+
+  <a href="donate.html" class="donate-btn">Donate Now</a>
+</header>
+
+<section class="contact-hero">
+  <h2>Contact Qandeel</h2>
+  <p>
+    Reach out to us for patient support, donations, volunteering, blood donation,
+    awareness programs, or emergency assistance.
+  </p>
+</section>
+
+<section class="contact-cards">
+
+  <div class="contact-card">
+    <h3>📞 Call Us</h3>
+    <p>03333002324</p>
+    <p>03360334496</p>
+    <p>03133300024</p>
+  </div>
+
+  <div class="contact-card">
+    <h3>📍 Visit Us</h3>
+    <p>Qandeel Thalassemia Care Center</p>
+    <p>Panjgur, Balochistan</p>
+  </div>
+
+  <div class="contact-card">
+    <h3>🩸 Blood & Patient Support</h3>
+    <p>Contact us for patient registration, treatment guidance, blood donation, and volunteer support.</p>
+  </div>
+
+</section>
+
+<section class="contact-page">
+  <h2>Send Us a Message</h2>
+  <p>Fill out the form below and our team will contact you as soon as possible.</p>
+
+  <div class="contact-container">
+
+    <form class="contact-form" id="contactForm">
+      <input type="text" id="fullName" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <input type="tel" id="phone" placeholder="Phone Number">
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div class="contact-info">
+      <h3>Qandeel Contact Information</h3>
+
+      <p><strong>Phone:</strong> 03333002324 / 03360334496 / 03133300024</p>
+      <p><strong>Location:</strong> Panjgur, Balochistan</p>
+      <p><strong>Purpose:</strong> Thalassemia patient care, blood donation, treatment support, and awareness programs.</p>
+
+      <div class="emergency-box">
+        <h4>Emergency Support</h4>
+        <p>
+          For urgent blood donation or patient support, please contact our team
+          directly through the phone numbers above.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="map-section">
+  <h2>Our Location</h2>
+
+  <iframe
+    src="https://www.google.com/maps?q=Panjgur%20Balochistan&output=embed"
+    width="100%"
+    height="360"
+    style="border:0;border-radius:16px;"
+    loading="lazy">
+  </iframe>
+</section>
+
+<footer class="footer">
+
+  <div class="footer-row">
+
+    <div class="footer-brand">
+      <strong>QANDEEL</strong>
+    </div>
+
+    <div class="footer-text">
+      Supporting Thalassemia patients through care, treatment and blood donation.
+    </div>
+
+    <div class="footer-location">
+      📍 Panjgur, Balochistan
+    </div>
+
+    <div class="footer-phone">
+      📞 03333002324
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Qandeel Thalassemia Care Center. All Rights Reserved.
+  </div>
+
+</footer>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const contactData = {
+    fullName: document.getElementById("fullName").value,
+    email: document.getElementById("email").value,
+    phone: document.getElementById("phone").value,
+    message: document.getElementById("message").value
+  };
+
+  try {
+    const response = await fetch("http://localhost:5000/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(contactData)
+    });
+
+    const result = await response.json();
+
+    alert(result.message);
+    document.getElementById("contactForm").reset();
+
+  } catch (error) {
+    alert("Error connecting to server");
+    console.error(error);
+  }
+});
+</script>
+
+</body>
+</html>

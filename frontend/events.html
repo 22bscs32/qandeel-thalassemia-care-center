@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events - Qandeel Thalassemia Care Center</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="logo-container">
+    <img src="images/logo.jpeg" alt="Qandeel Thalassemia Care Center Logo" class="logo-img">
+
+    <div class="logo">
+      <h2>QANDEEL</h2>
+      <p>THALASSEMIA CARE CENTER</p>
+      <span class="tagline">Saving Lives Through Blood Donation & Care</span>
+    </div>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="donors.html">Donors</a>
+    <a href="success-stories.html">Success Stories</a>
+    <a href="patients.html">Patients</a>
+    <a href="events.html" class="active">Events</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <a href="donate.html" class="donate-btn">Donate Now</a>
+</header>
+
+<section class="events-page">
+  <h2>Events & Awareness Programs</h2>
+  <p>
+    Explore Qandeel Thalassemia Care Center's awareness walks, blood donation
+    camps, community programs, and public health activities.
+  </p>
+
+  <div id="eventsContainer" class="events-grid"></div>
+</section>
+
+<div id="eventLightbox" class="image-lightbox">
+  <span class="lightbox-close" onclick="closeEventLightbox()">×</span>
+  <img id="eventLightboxImage" src="" alt="Event Image">
+</div>
+
+<footer class="footer">
+
+  <div class="footer-row">
+
+    <div class="footer-brand">
+      <strong>QANDEEL</strong>
+    </div>
+
+    <div class="footer-text">
+      Supporting Thalassemia patients through care, treatment and blood donation.
+    </div>
+
+    <div class="footer-location">
+      📍 Panjgur, Balochistan
+    </div>
+
+    <div class="footer-phone">
+      📞 03333002324
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Qandeel Thalassemia Care Center. All Rights Reserved.
+  </div>
+
+</footer>
+
+<script>
+async function loadEvents() {
+  try {
+    const response = await fetch("http://localhost:5000/api/events");
+    const events = await response.json();
+
+    const container = document.getElementById("eventsContainer");
+
+    if (events.length === 0) {
+      container.innerHTML = "<p>No events available yet.</p>";
+      return;
+    }
+
+    container.innerHTML = events.map(event => `
+      <div class="event-card-modern">
+
+        <div class="event-image">
+          <img
+            src="${event.image || 'images/logo.jpeg'}"
+            alt="${event.title}"
+            onclick="openEventLightbox('${event.image || 'images/logo.jpeg'}')"
+          >
+          <span class="event-date-badge">📅 ${event.date}</span>
+        </div>
+
+        <div class="event-body">
+          <span class="event-tag">Community Program</span>
+
+          <h3>${event.title}</h3>
+
+          <div class="event-info">
+            <p>📅 <strong>Date:</strong> ${event.date}</p>
+            <p>📍 <strong>Location:</strong> ${event.location}</p>
+          </div>
+
+          <p class="event-description">
+            ${
+              event.description && event.description.length > 170
+              ? event.description.substring(0, 170) + "..."
+              : event.description || ""
+            }
+          </p>
+
+          <button
+            class="read-more-btn"
+            onclick="openEventDetails('${event._id}')"
+          >
+            Read More →
+          </button>
+        </div>
+
+      </div>
+    `).join("");
+
+    window.eventsData = events;
+
+  } catch (error) {
+    console.error("Error loading events:", error);
+  }
+}
+
+function openEventLightbox(imageUrl) {
+  document.getElementById("eventLightboxImage").src = imageUrl;
+  document.getElementById("eventLightbox").style.display = "flex";
+}
+
+function closeEventLightbox() {
+  document.getElementById("eventLightbox").style.display = "none";
+  document.getElementById("eventLightboxImage").src = "";
+}
+
+function openEventDetails(id) {
+  const event = window.eventsData.find(item => item._id === id);
+
+  alert(
+    event.title + "\\n\\n" +
+    "Date: " + event.date + "\\n" +
+    "Location: " + event.location + "\\n\\n" +
+    event.description
+  );
+}
+
+document.addEventListener("click", function(e) {
+  const lightbox = document.getElementById("eventLightbox");
+
+  if (e.target === lightbox) {
+    closeEventLightbox();
+  }
+});
+
+loadEvents();
+</script>
+
+</body>
+</html>

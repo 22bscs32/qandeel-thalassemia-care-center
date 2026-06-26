@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patients - Qandeel Thalassemia Care Center</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <div class="logo-container">
+    <img src="images/logo.jpeg" alt="Qandeel Thalassemia Care Center Logo" class="logo-img">
+
+    <div class="logo">
+      <h2>QANDEEL</h2>
+      <p>THALASSEMIA CARE CENTER</p>
+      <span class="tagline">Saving Lives Through Blood Donation & Care</span>
+    </div>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="donors.html">Donors</a>
+    <a href="success-stories.html">Success Stories</a>
+    <a href="patients.html" class="active">Patients</a>
+    <a href="events.html">Events</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <a href="donate.html" class="donate-btn">Donate Now</a>
+</header>
+
+<section class="patient-hero">
+  <h2>Patient Support & Registration</h2>
+  <p>
+    Qandeel Thalassemia Care Center Panjgur is supporting more than
+    <strong>300 registered Thalassemia patients</strong>. So far,
+    <strong>150 patients</strong> have received specialized treatment and
+    <strong>146 children</strong> have shown significant improvement.
+  </p>
+</section>
+
+<section class="patient-stats">
+  <div class="patient-stat-box">
+    <h3>300+</h3>
+    <p>Total Patients</p>
+  </div>
+
+  <div class="patient-stat-box">
+    <h3>150+</h3>
+    <p>Treated Patients</p>
+  </div>
+
+  <div class="patient-stat-box">
+    <h3>146+</h3>
+    <p>Improved Children</p>
+  </div>
+
+  <div class="patient-stat-box">
+    <h3>150+</h3>
+    <p>Waiting for Treatment</p>
+  </div>
+</section>
+
+<section class="treatment-process">
+  <h2>Our Patient Care Process</h2>
+
+  <div class="process-cards">
+
+    <div class="process-card">
+      <h3>1. Patient Registration</h3>
+      <p>
+        Families register Thalassemia patients with basic details so the center
+        can identify their needs and provide guidance.
+      </p>
+    </div>
+
+    <div class="process-card">
+      <h3>2. Medical Review</h3>
+      <p>
+        Patient condition is reviewed by doctors and healthcare professionals
+        for treatment planning and follow-up care.
+      </p>
+    </div>
+
+    <div class="process-card">
+      <h3>3. Treatment Support</h3>
+      <p>
+        Selected patients are supported for specialized treatment in Karachi
+        and Peshawar with the help of donors.
+      </p>
+    </div>
+
+    <div class="process-card">
+      <h3>4. Follow-up Care</h3>
+      <p>
+        After treatment, patients receive follow-up guidance, medicines,
+        monitoring, and family counseling.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section class="patient-registration">
+  <h2>Patient Registration</h2>
+  <p>
+    Register a Thalassemia patient to receive support, treatment guidance,
+    and care from Qandeel Thalassemia Care Center.
+  </p>
+
+  <form id="patientForm">
+    <input type="text" id="patientName" placeholder="Patient Name" required>
+    <input type="number" id="age" placeholder="Age" required>
+    <input type="text" id="bloodGroup" placeholder="Blood Group" required>
+    <input type="text" id="guardianName" placeholder="Parent / Guardian Name" required>
+    <input type="tel" id="phone" placeholder="Phone Number" required>
+    <input type="text" id="city" placeholder="City" required>
+
+    <button type="submit">Register Patient</button>
+  </form>
+</section>
+
+<section class="patient-stories">
+  <h2>Hope Through Treatment</h2>
+  <p>
+    With timely treatment, medical care, and donor support, many children can
+    live healthier lives and reduce their dependency on regular transfusions.
+  </p>
+
+  <div class="story-cards">
+
+    <div class="story-card">
+      <img src="images/patient1.jpeg" alt="Patient Story">
+      <h3>Specialized Treatment</h3>
+      <p>
+        150+ patients have received treatment support through Qandeel's efforts.
+      </p>
+    </div>
+
+    <div class="story-card">
+      <img src="images/patient2.jpeg" alt="Patient Story">
+      <h3>Improved Health</h3>
+      <p>
+        146 children have shown significant improvement after treatment.
+      </p>
+    </div>
+
+    <div class="story-card">
+      <img src="images/patient3.jpeg" alt="Patient Story">
+      <h3>More Patients Need Help</h3>
+      <p>
+        150 patients are still waiting for treatment and need community support.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer">
+
+  <div class="footer-row">
+
+    <div class="footer-brand">
+      <strong>QANDEEL</strong>
+    </div>
+
+    <div class="footer-text">
+      Supporting Thalassemia patients through care, treatment and blood donation.
+    </div>
+
+    <div class="footer-location">
+      📍 Panjgur, Balochistan
+    </div>
+
+    <div class="footer-phone">
+      📞 03333002324
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Qandeel Thalassemia Care Center. All Rights Reserved.
+  </div>
+
+</footer>
+
+<script>
+document.getElementById("patientForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const patientData = {
+    patientName: document.getElementById("patientName").value,
+    age: document.getElementById("age").value,
+    bloodGroup: document.getElementById("bloodGroup").value,
+    guardianName: document.getElementById("guardianName").value,
+    phone: document.getElementById("phone").value,
+    city: document.getElementById("city").value
+  };
+
+  try {
+    const response = await fetch("http://localhost:5000/api/patients", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(patientData)
+    });
+
+    const result = await response.json();
+    alert(result.message);
+    document.getElementById("patientForm").reset();
+
+  } catch (error) {
+    alert("Error connecting to server");
+    console.error(error);
+  }
+});
+</script>
+
+</body>
+</html>

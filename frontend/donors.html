@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donors - Qandeel Thalassemia Care Center</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo-container">
+      <img src="images/logo.jpeg" alt="Qandeel Thalassemia Care Center Logo" class="logo-img">
+
+      <div class="logo">
+        <h2>QANDEEL</h2>
+        <p>THALASSEMIA CARE CENTER</p>
+        <span class="tagline">
+          Saving Lives Through Blood Donation & Care
+        </span>
+      </div>
+    </div>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="donors.html" class="active">Donors</a>
+      <a href="success-stories.html" class="active">Success Stories</a>
+      <a href="patients.html">Patients</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <a href="donate.html" class="donate-btn">Donate Now</a>
+  </header>
+
+  <section class="page-title">
+    <h1>Become a Blood Donor</h1>
+    <p>
+      Register yourself and help save Thalassemia patients through blood donation.
+    </p>
+  </section>
+
+  <section class="donor-form">
+    <h2>Blood Donor Registration</h2>
+
+    <form id="donorForm">
+
+      <input
+        type="text"
+        id="fullName"
+        placeholder="Full Name"
+        required
+      >
+
+      <input
+        type="text"
+        id="bloodGroup"
+        placeholder="Blood Group"
+        required
+      >
+
+      <input
+        type="tel"
+        id="phone"
+        placeholder="Phone Number"
+        required
+      >
+
+      <input
+        type="text"
+        id="city"
+        placeholder="City"
+        required
+      >
+
+      <button type="submit">
+        Register as Donor
+      </button>
+
+    </form>
+  </section>
+
+<footer class="footer">
+
+  <div class="footer-row">
+
+    <div class="footer-brand">
+      <strong>QANDEEL</strong>
+    </div>
+
+    <div class="footer-text">
+      Supporting Thalassemia patients through care, treatment and blood donation.
+    </div>
+
+    <div class="footer-location">
+      📍 Panjgur, Balochistan
+    </div>
+
+    <div class="footer-phone">
+      📞 03333002324
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Qandeel Thalassemia Care Center. All Rights Reserved.
+  </div>
+
+</footer>
+
+  <script>
+    document.getElementById("donorForm").addEventListener("submit", async (e) => {
+
+      e.preventDefault();
+
+      const donorData = {
+        fullName: document.getElementById("fullName").value,
+        bloodGroup: document.getElementById("bloodGroup").value,
+        phone: document.getElementById("phone").value,
+        city: document.getElementById("city").value
+      };
+
+      try {
+
+        const response = await fetch("http://localhost:5000/api/donors", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(donorData)
+        });
+
+        const result = await response.json();
+
+        alert(result.message);
+
+        document.getElementById("donorForm").reset();
+
+      } catch (error) {
+
+        alert("Error connecting to server");
+        console.error(error);
+
+      }
+
+    });
+  </script>
+
+</body>
+</html>
