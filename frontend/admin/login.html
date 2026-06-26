@@ -79,25 +79,31 @@
   </div>
 
 </footer>
-
 <script>
 async function login() {
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
 
-  const response = await fetch("http://qandeel-thalassemia-care-center-production.up.railway.app/api/admin/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ username, password })
-  });
+  try {
+    const response = await fetch("https://qandeel-thalassemia-care-center-production.up.railway.app/api/admin/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username, password })
+    });
 
-  if (response.ok) {
-    localStorage.setItem("adminLoggedIn", "true");
-    window.location.href = "dashboard.html";
-  } else {
-    alert("Invalid Username or Password");
+    const data = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem("adminLoggedIn", "true");
+      window.location.href = "dashboard.html";
+    } else {
+      alert(data.message || "Invalid Username or Password");
+    }
+  } catch (error) {
+    alert("Server connection failed. Please try again.");
+    console.error(error);
   }
 }
 </script>
