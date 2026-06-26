@@ -28,7 +28,7 @@ router.post("/", upload.single("image"), async (req, res) => {
       city: req.body.city,
       story: req.body.story,
       status: req.body.status,
-      image: req.file ? `http://qandeel-thalassemia-care-center-production.up.railway.app/uploads/${req.file.filename}` : ""
+      image: req.file ? `https://qandeel-thalassemia-care-center-production.up.railway.app/uploads/${req.file.filename}` : ""
     });
 
     await story.save();

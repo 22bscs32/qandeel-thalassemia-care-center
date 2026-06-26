@@ -22,7 +22,7 @@ router.post("/", upload.single("image"), async (req, res) => {
     const { title, date, location, description } = req.body;
 
     const imagePath = req.file
-      ? `http://qandeel-thalassemia-care-center-production.up.railway.app/uploads/${req.file.filename}`
+      ? `https://qandeel-thalassemia-care-center-production.up.railway.app/uploads/${req.file.filename}`
       : "";
 
     const event = new Event({

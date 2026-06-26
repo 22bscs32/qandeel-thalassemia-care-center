@@ -141,7 +141,7 @@
 <script>
 async function loadSuccessStats() {
   try {
-    const response = await fetch("http://qandeel-thalassemia-care-center-production.up.railway.app/api/stats");
+    const response = await fetch("https://qandeel-thalassemia-care-center-production.up.railway.app/api/stats");
     const data = await response.json();
 
     document.getElementById("totalPatients").innerText =
