@@ -2257,3 +2257,112 @@ nav a:hover {
 
 
 
+
+
+
+
+
+/* FINAL RESPONSIVE FIX */
+
+body {
+  margin: 0;
+  padding-top: 0;
+  overflow-x: hidden;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  header {
+    flex-direction: column;
+    padding: 15px 20px;
+    gap: 15px;
+  }
+
+  .logo-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 20px;
+  }
+
+  .header-buttons {
+    justify-content: center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  header {
+    position: relative;
+    padding: 18px 12px;
+  }
+
+  .logo-img {
+    width: 85px;
+    height: 85px;
+  }
+
+  .logo h2 {
+    font-size: 34px;
+  }
+
+  .logo p {
+    font-size: 13px;
+    letter-spacing: 3px;
+  }
+
+  .tagline {
+    font-size: 13px;
+    white-space: normal;
+  }
+
+  nav {
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+  }
+
+  nav a {
+    font-size: 17px;
+  }
+
+  .admin-btn,
+  .donate-btn {
+    font-size: 16px;
+    padding: 12px 24px;
+  }
+
+  .hero {
+    min-height: 70vh;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 38px;
+  }
+
+  .hero p {
+    font-size: 17px;
+  }
+
+  section {
+    padding: 55px 18px;
+  }
+
+  section h2 {
+    font-size: 34px;
+  }
+}
